@@ -45,6 +45,7 @@ average:
         sdiv w5, w5, w9
 1:
     strb    w5, [x1]
+    strb    w15, [x1]
     add     x0, x0, #3
     add     x1, x1, #1
     b       0b
