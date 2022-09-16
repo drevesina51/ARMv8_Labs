@@ -20,13 +20,28 @@ grey_filter_asm:
     mov     x6, #0
 search_max:
     cmp     x6, #3
-    beq     1f
+    beq     min
     ldrb    w7, [x0, x6]
     add     x6, x6, #1
     cmp     x5, x7
     ble     search_max
     mov     x5, x7
     b       search_max
+min:
+    ldrb    w15, [x0]
+    mov     x16, #0
+search_min:
+    cmp     x16, #3
+    beq     average
+    ldrb    w17, [x0, x16]
+    add     x16, x16, #1
+    cmp     x15, x17
+    ble     search_min
+    mov     x15, x17
+    b       search_min
+average:
+        add w5, w5, w15
+        sdiv w5, w5, #2
 1:
     strb    w5, [x1]
     add     x0, x0, #3
