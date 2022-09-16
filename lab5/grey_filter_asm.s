@@ -40,8 +40,9 @@ search_min:
     mov     x15, x17
     b       search_min
 average:
+        mov w9, #2 
         add w5, w5, w15
-        sdiv w5, w5, #2
+        sdiv w5, w5, w9
 1:
     strb    w5, [x1]
     add     x0, x0, #3
