@@ -36,7 +36,7 @@ search_min:
     ldrb    w17, [x0, x16]
     add     x16, x16, #1
     cmp     x15, x17
-    ble     search_min
+    bge     search_min
     mov     x15, x17
     b       search_min
 average:
@@ -45,7 +45,6 @@ average:
         sdiv w5, w5, w9
 1:
     strb    w5, [x1]
-    strb    w15, [x1]
     add     x0, x0, #3
     add     x1, x1, #1
     b       0b
