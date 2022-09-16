@@ -33,6 +33,32 @@ _start:
 
         // p3 = a + e^3 - c
         mul w10, w5, w5
+        
+        // p2 = (c - d)^2
+        sub w7, w3, w4
+        smull x10, w7, w7
+
+        // p4 = p1 - p2
+        sub x9, x9, x10
+
+        // p5 =  p4 / p3
+        sdiv x8, x9, x8
+
+        // 0 + p5
+        mov x20, #0
+        add x8, x20, w8, sxtw
+
+        // get result
+        adr     x0, res
+        str     x8, [x0]
+        mov     x0, #0
+        b _exit
+        _bad_exit:
+                mov     x0, #1
+        _exit:
+                mov x8, #93
+                svc     #0
+        .size   _start, .-_start
         smull x8, w10, w5
         add x8, x8, w1, sxtw
         sub x8, x8, w3, sxtw
